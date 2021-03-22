@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:hsf="http://www.taobao.com/hsf"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:contex="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.taobao.com/hsf
+       http://www.taobao.com/hsf/hsf.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
+    <!-- 消费一个服务示例 -->
+    <!--<contex:component-scan base-package="com.taobao.hsf.app.spring.*"/>-->
+
+
+
+
+    <!-- 搜商二方包服务  -->
+    <!--<bean id="sellerQueryService" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean" init-method="init">-->
+        <!--<property name="interfaceName" value="com.wuage.search.share.service.SellerQueryService" />-->
+        <!--<property name="version" value="${SellerSearchService_version}" />-->
+        <!--<property name="group" value="${SellerSearchService_group}" />-->
+        <!--<property name="clientTimeout" value="${SellerSearchService_timeout}" />-->
+    <!--</bean>-->
+    <!-- 172.17.4.15 jmenv.tbsite.net -->
+
+
+
+    <hsf:consumer id="offerQueryService" interface="com.wuage.search.share.service.OfferQueryService"
+    version="1.0.0"
+    group="HSF">
+    </hsf:consumer>
+
+    <!--<hsf:consumer id="sellerQueryService" interface="com.wuage.search.share.service.SellerQueryService"-->
+                  <!--version="1.0.0"-->
+                  <!--group="HSF">-->
+    <!--</hsf:consumer>-->
+
+    <bean id="sellerQueryService" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+          init-method="init" lazy-init="true">
+        <property name="interfaceName" value="com.wuage.search.share.service.SellerQueryService"/>
+        <property name="version" value="1.0.0"/>
+        <property name="group" value="HSF"/>
+        <property name="clientTimeout" value="8000"/>
+    </bean>
+
+    <!--<bean id="paymentActionService" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"-->
+          <!--init-method="init" lazy-init="true">-->
+        <!--<property name="interfaceName" value="com.wuage.payway.shared.api.accounts.service.PaymentActionService"/>-->
+        <!--<property name="version" value="1.0.0"/>-->
+        <!--<property name="group" value="HSF"/>-->
+        <!--<property name="clientTimeout" value="8000"/>-->
+    <!--</bean>-->
+
+
+
+</beans>
